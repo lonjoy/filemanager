@@ -157,8 +157,8 @@ $('#uploadfile').on('click', function() {
 		var files = $('#file')[0].files;
 		$('#uploadFileSave').unbind('click').on('click', function() {
 			var $currentdir = $('.filename').attr("data-dir");
-			var formdata = new FormData();
-			formdata.append('upload', files[0])
+			var formdata = new FormData();       //初始化formdata对象
+			formdata.append('upload', files[0])        //附加参数
 			formdata.append('op', 'upload')
 			formdata.append('dirpath', $currentdir)
 			//$.post('/API', data);
@@ -167,7 +167,7 @@ $('#uploadfile').on('click', function() {
 				url: '/API',
 				data: formdata,
 				processData: false,
-  				contentType: false,
+  				contentType: false,               //阻止ajax去检测类型并把它转化成一个字符串
   				success: function(result) {
 					console.log(result);
 					$('table tr').remove();

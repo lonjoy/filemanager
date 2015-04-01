@@ -32,8 +32,8 @@ app.get("/API", function(request, response) {
 });
 
 app.post("/API", function(request, response){
-	var form = new multiparty.Form();
-	form.parse(request, function(err, fields, files) {
+	var form = new multiparty.Form();          //使用multiparty初始化一个表单
+	form.parse(request, function(err, fields, files) {          //解析，文件内容在files里，其他参数在fields里
   		if (err) { throw err; };
   		if (fields.op[0] == "upload") {
   			fileopt.uploadFile(fields.dirpath[0], files, response)

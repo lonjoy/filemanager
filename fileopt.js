@@ -56,7 +56,7 @@ exports.deleteDir = function(dirpath, dirname, response) {
 	realpath = path.join("./public", dirpath);
 	//console.log(realpath);
 	//console.log(dirpath);
-	recursionRemove = function(removepath) {
+	recursionRemove = function(removepath) {        //递归删除
 		var state = fs.statSync(removepath);
 		if (state.isDirectory()) { //目录
 			var array = fs.readdirSync(removepath);
@@ -104,12 +104,12 @@ exports.uploadFile = function(dirpath, files, response) {
 	}
 	realpath = path.join("./public", dirpath);
 	if (files.upload != "undefined") {
-      	var tempPath = files.upload[0].path;
-		var filename = files.upload[0].originalFilename;
-		var filepath = path.join(realpath, filename);
+      	var tempPath = files.upload[0].path;    //临时文件路径
+		var filename = files.upload[0].originalFilename;    //文件名
+		var filepath = path.join(realpath, filename);      //存储路径
 		fs.exists(filepath, function(exists) {
 			if (!exists) {
-				fs.renameSync(tempPath, filepath);
+				fs.renameSync(tempPath, filepath);          //把临时文件复制过来
 				fs.exists(tempPath, function(exists) {
 					if (exists) {
 						fs.unlinkSync(tempPath);
